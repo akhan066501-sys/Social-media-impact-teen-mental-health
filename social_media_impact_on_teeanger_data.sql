@@ -36,7 +36,7 @@ SELECT * FROM social_media_data;
 -- Q2: Total number of teens in dataset
 SELECT COUNT(*) AS total_teens FROM social_media_data;
 
--- Q3: Overall summary stats
+-- : Overall summary stats
 SELECT
     COUNT(*)                                    AS total_teens,
     ROUND(AVG(daily_social_media_hours)::NUMERIC, 2)     AS avg_sm_hours,
@@ -50,7 +50,7 @@ SELECT
     ROUND(AVG(depression_label)::NUMERIC * 100, 2)       AS depression_rate_pct
 FROM social_media_data;
 
--- Q4: Gender distribution
+-- : Gender distribution
 SELECT
     gender,
     COUNT(*) AS total_teens,
@@ -58,7 +58,7 @@ SELECT
 FROM social_media_data
 GROUP BY gender;
 
--- Q5: Platform usage distribution
+-- : Platform usage distribution
 SELECT
     platform_usage,
     COUNT(*) AS total_teens,
@@ -67,7 +67,7 @@ FROM social_media_data
 GROUP BY platform_usage
 ORDER BY total_teens DESC;
 
--- Q6: Age distribution
+-- : Age distribution
 SELECT
     age,
     COUNT(*) AS total_teens
@@ -80,7 +80,7 @@ ORDER BY age;
 -- 3. PLATFORM-WISE MENTAL HEALTH ANALYSIS
 -- ============================================================
 
--- Q7: Platform vs all mental health metrics
+-- : Platform vs all mental health metrics
 SELECT
     platform_usage,
     COUNT(*)                                    AS total_teens,
@@ -95,7 +95,7 @@ FROM social_media_data
 GROUP BY platform_usage
 ORDER BY avg_anxiety DESC;
 
--- Q8: Which platform has highest stress?
+-- : Which platform has highest stress?
 SELECT
     platform_usage,
     ROUND(AVG(stress_level)::NUMERIC, 2) AS avg_stress
@@ -104,7 +104,7 @@ GROUP BY platform_usage
 ORDER BY avg_stress DESC
 LIMIT 1;
 
--- Q9: Platform vs academic performance
+-- : Platform vs academic performance
 SELECT
     platform_usage,
     ROUND(AVG(academic_performance)::NUMERIC, 2) AS avg_academic_perf,
@@ -118,7 +118,7 @@ ORDER BY avg_academic_perf DESC;
 -- 4. SOCIAL MEDIA USAGE BUCKETS ANALYSIS
 -- ============================================================
 
--- Q10: SM usage buckets vs mental health
+-- : SM usage buckets vs mental health
 SELECT
     CASE
         WHEN daily_social_media_hours < 3 THEN 'Low (<3 hrs)'
@@ -137,7 +137,7 @@ FROM social_media_data
 GROUP BY sm_bucket
 ORDER BY avg_sm_hours;
 
--- Q11: SM usage buckets vs academic performance
+-- : SM usage buckets vs academic performance
 SELECT
     CASE
         WHEN daily_social_media_hours < 3 THEN 'Low (<3 hrs)'
@@ -156,7 +156,7 @@ ORDER BY avg_academic_perf DESC;
 -- 5. GENDER-WISE ANALYSIS
 -- ============================================================
 
--- Q12: Gender vs all mental health metrics
+-- : Gender vs all mental health metrics
 SELECT
     gender,
     COUNT(*)                                    AS total_teens,
@@ -171,7 +171,7 @@ SELECT
 FROM social_media_data
 GROUP BY gender;
 
--- Q13: Gender + Platform combination
+-- : Gender + Platform combination
 SELECT
     gender,
     platform_usage,
@@ -203,7 +203,7 @@ FROM social_media_data
 GROUP BY age
 ORDER BY age;
 
--- Q15: Age + Gender mental health breakdown
+-- : Age + Gender mental health breakdown
 SELECT
     age,
     gender,
@@ -219,7 +219,7 @@ ORDER BY age;
 -- 7. SLEEP ANALYSIS
 -- ============================================================
 
--- Q16: Sleep buckets vs anxiety & depression
+-- : Sleep buckets vs anxiety & depression
 SELECT
     CASE
         WHEN sleep_hours < 5 THEN 'Very Low (<5 hrs)'
@@ -236,7 +236,7 @@ FROM social_media_data
 GROUP BY sleep_bucket
 ORDER BY avg_anxiety DESC;
 
--- Q17: Sleep vs anxiety by age (proxy correlation)
+-- : Sleep vs anxiety by age (proxy correlation)
 SELECT
     age,
     FLOOR(sleep_hours)                      AS sleep_bucket,
@@ -246,7 +246,7 @@ FROM social_media_data
 GROUP BY age, sleep_bucket
 ORDER BY age, sleep_bucket;
 
--- Q18: Screen time before sleep vs sleep quality
+-- : Screen time before sleep vs sleep quality
 SELECT
     CASE
         WHEN screen_time_before_sleep < 1 THEN 'Very Low (<1 hr)'
@@ -267,7 +267,7 @@ ORDER BY avg_sleep DESC;
 -- 8. DEPRESSION RISK PROFILE
 -- ============================================================
 
--- Q19: Depression by gender + platform
+-- : Depression by gender + platform
 SELECT
     gender,
     platform_usage,
@@ -281,7 +281,7 @@ WHERE depression_label = 1
 GROUP BY gender, platform_usage
 ORDER BY depression_count DESC;
 
--- Q20: Depressed vs Non-depressed comparison
+-- : Depressed vs Non-depressed comparison
 SELECT
     CASE WHEN depression_label = 1 THEN 'Depressed' ELSE 'Not Depressed' END AS status,
     COUNT(*)                                    AS total_teens,
@@ -294,7 +294,7 @@ SELECT
 FROM social_media_data
 GROUP BY status;
 
--- Q21: All depressed teens — full profile
+-- : All depressed teens — full profile
 SELECT
      age, gender, platform_usage,
     daily_social_media_hours, sleep_hours,
@@ -304,7 +304,7 @@ FROM social_media_data
 WHERE depression_label = 1
 ORDER BY stress_level DESC;
 
--- Q22: Depression rate by age group + gender
+-- : Depression rate by age group + gender
 SELECT
     CASE
         WHEN age BETWEEN 13 AND 14 THEN '13-14'
@@ -330,7 +330,7 @@ ORDER BY age_group, gender;
 -- 9. SOCIAL INTERACTION LEVEL ANALYSIS
 -- ============================================================
 
--- Q23: Social interaction vs mental health
+-- : Social interaction vs mental health
 SELECT
     social_interaction_level,
     COUNT(*)                                    AS total_teens,
@@ -343,7 +343,7 @@ FROM social_media_data
 GROUP BY social_interaction_level
 ORDER BY avg_anxiety DESC;
 
--- Q24: Social interaction + platform combination
+-- : Social interaction + platform combination
 SELECT
     platform_usage,
     social_interaction_level,
@@ -359,7 +359,7 @@ ORDER BY platform_usage, avg_anxiety DESC;
 -- 10. WINDOW FUNCTIONS
 -- ============================================================
 
--- Q25: Rank top 10% most addicted teens
+-- : Rank top 10% most addicted teens
 WITH ranked AS (
     SELECT
         age, gender, platform_usage,
@@ -375,7 +375,7 @@ WHERE decile = 1
 ORDER BY addiction_level DESC;
 
 
--- Q26: Rank teens by stress within each platform
+-- : Rank teens by stress within each platform
 
 SELECT
     age,
@@ -390,7 +390,7 @@ FROM social_media_data
 ORDER BY platform_usage, stress_rank;
 
 
--- Q27: Top 5 most stressed teens per platform
+-- : Top 5 most stressed teens per platform
 WITH stress_ranked AS (
     SELECT
         age, gender, platform_usage,
@@ -407,7 +407,7 @@ WHERE rn <= 5;
 -- 11. CORRELATION / RISK QUERIES
 -- ============================================================
 
--- Q28: High-risk teens (high SM + low sleep + high stress)
+-- : High-risk teens (high SM + low sleep + high stress)
 SELECT
     age, gender, platform_usage,
     daily_social_media_hours, sleep_hours,
@@ -418,7 +418,7 @@ WHERE daily_social_media_hours > 6
   AND stress_level > 7
 ORDER BY stress_level DESC;
 
--- Q29: Count high-risk teens
+-- : Count high-risk teens
 SELECT COUNT(*) AS high_risk_teens
 FROM social_media_data
 WHERE daily_social_media_hours > 6
@@ -430,7 +430,7 @@ WHERE daily_social_media_hours > 6
 -- 12. FINAL EXECUTIVE SUMMARY
 -- ============================================================
 
--- Q30: Complete executive summary — one query
+-- : Complete executive summary — one query
 SELECT 'Total Teens'           AS metric, CAST(COUNT(*) AS VARCHAR)                                          AS value FROM social_media_data
 UNION ALL
 SELECT 'Avg SM Hours',          CAST(ROUND(AVG(daily_social_media_hours)::NUMERIC, 2) AS VARCHAR)             FROM social_media_data
