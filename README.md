@@ -9,8 +9,11 @@ Exploratory data analysis (EDA) of social media usage and its impact on teenager
 | File | Description |
 |------|-------------|
 | `Raw_Data.csv` | Original dataset — 1200 teenager records |
-| `social_media_data.ipynb` | Main Jupyter Notebook with full EDA |
-| `Social_Media_impact_on_teenager_analysis.xlsx` | Excel-based summary analysis |
+| `social_media_data_notbook.ipynb` | Main Jupyter Notebook with full EDA |
+| `Social_Media_impact_on_teenager_mental_health.xlsx` | Excel-based summary analysis |
+|`social_media_impact_on_teenager_mental_health_dashboard_picture.png`|Dashboard picture|
+|`social_media_impact_on_teenager_data.sql`| SQL file |
+|`social_media_impact_on_teenager mentel health dashboard file.pbix`|Dashboard file|
 
 ---
 
