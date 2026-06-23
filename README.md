@@ -1,4 +1,4 @@
-# Social-media-impact-teenager-mental-health
+# Social-media-impact-on-teenager-mental-health
 Exploratory data analysis (EDA) of social media usage and its impact on teenager mental health — covering stress, anxiety, sleep, academic performance, and depression across 1,200 records (ages 13–19). Built with Python, Pandas, Matplotlib, and Seaborn.
 
 "In today's world, teenagers spend a significant amount of time on social media. This project uses data to understand how excessive screen time affects their mental health, sleep quality, and academic performance."
